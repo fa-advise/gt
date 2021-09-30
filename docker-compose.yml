@@ -16,6 +16,7 @@ services:
         - redis
       volumes:
           - /etc/fa-advise-license.txt:/var/www/license.txt
+      network_mode: host
       ports:
           - 8000:8000
 
@@ -24,11 +25,15 @@ services:
       volumes:
         - mongo:/var/lib/mongo
         - ./mongo/mongod.conf:/etc/mongod.conf
+      network_mode: host
 
   rabbitmq:
       image: rabbitmq:3.7.12
+      network_mode: host
 
   redis:
       image: redis:5.0.3
+      network_mode: host
+
 volumes:
   mongo:
