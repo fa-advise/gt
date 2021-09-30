@@ -3,7 +3,7 @@ version: "3.1"
 
 services:
 
-  globotunes:
+  web:
       image: "reg.fa-advise.net:2083/gt:v1.2"
       environment:
         - COMPOSER_MEMORY_LIMIT=-1
@@ -16,9 +16,13 @@ services:
         - redis
       volumes:
           - /etc/fa-advise-license.txt:/var/www/license.txt
+          - ./supervisord.conf:/etc/supervisor/supervisord.conf
       network_mode: host
-      ports:
-          - 8000:8000
+      extra_hosts:
+          - mongo_master:127.0.0.1
+          - rebbitmq:127.0.0.1
+          - redis:127.0.0.1
+
 
   mongo_master:
       image: mongo:3.4
