@@ -1,0 +1,33 @@
+version: "3.1"
+
+
+services:
+
+  globotunes:
+      image: "reg.fa-advise.net:2083/gt:${VERSION}"
+      environment:
+        - COMPOSER_MEMORY_LIMIT=-1
+        - APP_TYPE
+        - ENV=prod
+        - PROD=yes
+
+      depends_on:
+        - mongo_master
+        - rabbitmq
+        - redis
+      volumes:
+          - /etc/fa-advise-license.txt:/var/www/license.txt
+      ports:
+          - 8000:8000
+
+  mongo_master:
+      image: mongo:3.4
+      volumes:
+        - mongo:/var/lib/mongo
+        - ./mongo/mongod.conf:/etc/mongod.conf
+
+  rabbitmq:
+      image: rabbitmq:3.7.12
+
+  redis:
+      image: redis:5.0.3
