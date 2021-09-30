@@ -10,7 +10,6 @@ services:
         - APP_TYPE
         - ENV=prod
         - PROD=yes
-
       depends_on:
         - mongo_master
         - rabbitmq
@@ -31,3 +30,5 @@ services:
 
   redis:
       image: redis:5.0.3
+volumes:
+  mongo:
