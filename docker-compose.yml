@@ -16,7 +16,6 @@ services:
         - redis
       volumes:
           - /etc/fa-advise-license.txt:/var/www/license.txt
-          - ./supervisord.conf:/etc/supervisor/supervisord.conf
       network_mode: host
       extra_hosts:
           - mongo_master:127.0.0.1
